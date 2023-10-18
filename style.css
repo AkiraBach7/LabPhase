@@ -46,7 +46,7 @@ body{
   display:block;
   transition: all 0.3s ;
 }
-.btn:hover:not([sisabled]){
+.btn:hover:not([disabled]){
 background: #2c2c54;
 color: #fff;
 } 
@@ -70,4 +70,8 @@ color: #fff;
 }
 .incorrect{
   background: #ff9393;
+}
+.link{
+  color: #fff;
+  text-decoration: none;
 }
