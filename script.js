@@ -1,42 +1,44 @@
+
+/*Question Array*/
 const questions= [
     {
-        question: "1.What is the capital of Senegal?" ,
+        question: "What is the capital of Senegal?" ,
         answers: [
             {text: "Dakar" , correct: true},
-            {text: "Bamako" , correct: false},
-            {text: "Ouagadougou" , correct: false},
+            {text: "Thies" , correct: false},
+            {text: "Ziguinchor" , correct: false},
             {text:"Saint-Louis", correct: false},
         ]
     },    
     {
-        question: "2.What is the capital of France? ",
+        question: "What is the capital of France? ",
          answers: [
-            {text: "Wien", correct: false},
-            {text: "Munchen" , correct: false},
+            {text: " Bordeaux", correct: false},
+            {text: "Lyon" , correct: false},
             {text: "Paris" , correct: true},
             {text: "Marseille" , correct: false},
          ] 
     },
     {
-        question: "3.What is the capital of the United States of America? ",
+        question: "What is the capital of the United States of America? ",
          answers: [
-            {text: "Toronto", correct: false},
-            {text: "Milwaukee" , correct: false},
+            {text: "Las Vegas", correct: false},
+            {text: "New York" , correct: false},
             {text: "Washington" , correct: true},
-            {text: "Miami" , correct: false},
+            {text: "Los Angeles" , correct: false},
          ] 
     },
     {
-        question: "4.What is the capital of Brazil?",
+        question: "What is the capital of Brazil?",
          answers: [
             {text: "Brasilia", correct: true},
             {text: "Rio de Janeiro" , correct: false},
-            {text: "Asuncion" , correct: true},
-            {text: "Trinidad" , correct: false},
+            {text: "Belo Horizonte" , correct: false},
+            {text: "Sao Paulo" , correct: false},
          ] 
     },
     {
-        question: "5.What is the capital of Australia?",
+        question: "What is the capital of Australia?",
          answers: [
             {text: "Wellington", correct: false},
             {text: "Cook" , correct: false},
@@ -45,7 +47,7 @@ const questions= [
          ] 
     },
     {
-        question: "6.What is the capital of Saudi Arabia?",
+        question: "What is the capital of Saudi Arabia?",
          answers: [
             {text: "Saud", correct: false},
             {text: "Makkah" , correct: false},
@@ -54,34 +56,34 @@ const questions= [
          ] 
     },
     {
-        question: "7.What is the capital of Japan?",
+        question: "What is the capital of Japan?",
          answers: [
-            {text: "Inazuma", correct: false},
+            {text: "Nagasaki", correct: false},
             {text: "Osaka" , correct: false},
             {text: "Tokyo" , correct: true},
             {text: "Hiroshima" , correct: false},
          ] 
     },
     {
-        question: "8.What is the capital of Sweden?",
+        question: "What is the capital of Sweden?",
          answers: [
             {text: "Stockholm", correct: true},
             {text: "Oslo" , correct: false},
-            {text: "Paris" , correct: false},
-            {text: "Marseille" , correct: false},
+            {text: "Malmo" , correct: false},
+            {text: "Copenhagen" , correct: false},
          ] 
     },
     {
-        question: "9.What is the capital of Morocco?",
+        question: ".What is the capital of Morocco?",
          answers: [
             {text: "Rabat", correct: true},
             {text: "Fes" , correct: false},
-            {text: "Casablanca" , correct: true},
+            {text: "Casablanca" , correct: false},
             {text: "Marakkesh" , correct: false},
          ] 
     },
     {
-        question: "10.What is the capital of Dubai? ",
+        question: "What is the capital of Dubai?",
          answers: [
             {text: "Dubai", correct: false},
             {text: "Abu Dhabi" , correct: false},
@@ -90,7 +92,7 @@ const questions= [
          ] 
     },
     {
-        question: "11.What is the capital of Finland?",
+        question: "What is the capital of Finland?",
          answers: [
             {text: "Viking", correct: false},
             {text: "Greenland" , correct: false},
@@ -101,14 +103,14 @@ const questions= [
     {
         question: "12.What is the capital of Bahamas?",
          answers: [
-            {text: "Bahamas Island", correct: false},
-            {text: "Nassau" , correct: false},
-            {text: "San Jose" , correct: true},
+            {text: "Bahamas City", correct: false},
+            {text: "Nassau" , correct: true},
+            {text: "San Jose" , correct: false},
             {text: "Belmopan" , correct: false},
          ] 
     },
     {
-        question: "13.What is the capital of Spain?",
+        question: "What is the capital of Spain?",
          answers: [
             {text: "Madrid", correct: true},
             {text: "Barcelona" , correct: false},
@@ -117,7 +119,7 @@ const questions= [
          ] 
     },
     {
-        question: "14.What is the capital of Ukraine?",
+        question: "What is the capital of Ukraine?",
          answers: [
             {text: "Ukraine", correct: false},
             {text: "Odessa" , correct: false},
@@ -126,12 +128,94 @@ const questions= [
          ] 
     },
     {
-        question: "15.What is the capital of Nigeria?",
+        question: "What is the capital of Nigeria?",
          answers: [
             {text: "Abuja", correct: true},
             {text: "Port Harcourt" , correct: false},
             {text: "Nollywood" , correct: false},
-            {text: "Abuja" , correct: false},
+            {text: "Lagos" , correct: false},
          ] 
     },
 ];
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answer-buttons")
+const nextButton = document.getElementById("next-btn")
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function startQuiz(){
+   currentQuestionIndex = 0;
+   score = 0;
+   nextButton.innerHTML = "Next";
+   showQuestion();
+}
+
+function showQuestion(){
+   resetState();
+   let currentQuestion = questions[currentQuestionIndex];
+   let questionNo = currentQuestionIndex + 1;
+   questionElement.innerHTML = questionNo + ".  " + currentQuestion.
+   question;
+
+   currentQuestion.answers.forEach(answer=> {
+      const button = document.createElement("button");
+      button.innerHTML= answer.text;
+      button.classList.add("btn");
+      answerButtons.appendChild(button);
+      if(answer.correct){
+         button.dataset.correct = answer.correct;
+      }
+      button.addEventListener("click", selectAnswer);
+   })
+}
+
+function resetState(){
+   nextButton.style.display = "none";
+   while(answerButtons.firstChild){
+      answerButtons.removeChild(answerButtons.firstChild);
+   }
+}
+
+function selectAnswer(e){
+   const selectedBtn = e.target;
+   const isCorrect = selectedBtn.dataset.correct === "true";
+   if(isCorrect){
+      selectedBtn.classList.add("correct");
+   } else{
+      selectedBtn.classList.add("incorrect");
+   }
+   Array.from(answerButtons.children).forEach(button => {
+      if(button.dataset.correct === "true"){
+         button.classList.add("correct");
+      }
+      button.disabled = true;
+   });
+   nextButton.style.display = "block";
+}
+
+function showScore(){
+   resetState();
+   questionElement.innerHTML = `You scored ${score} out of ${questions.length
+   }!`;
+   nextButton.innerHTML = "Play Again";
+   nextButton.style.display = "block";
+}
+function handleNextButton(){
+   currentQuestionIndex++;
+   if(currentQuestionIndex < questions.length){
+      showQuestion();
+   }else{
+      showScore();
+   }
+}
+
+nextButton.addEventListener("click", ()=>{
+   if(currentQuestionIndex < questions.length){
+      handleNextButton();
+   }else{
+      startQuiz();
+   }
+
+})
+startQuiz();
