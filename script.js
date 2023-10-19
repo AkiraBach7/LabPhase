@@ -144,13 +144,14 @@ const nextButton = document.getElementById("next-btn")
 
 let currentQuestionIndex = 0;
 let score = 0;
-
+//function to start the Quiz
 function startQuiz(){
    currentQuestionIndex = 0;
    score = 0;
    nextButton.innerHTML = "Next";
    showQuestion();
 }
+//function to show the questions//
 
 function showQuestion(){
    resetState()
@@ -172,7 +173,22 @@ function showQuestion(){
       button.addEventListener("click", selectAnswer);
    });
 }
+//function to set the timer
+var timer;
+var ele = document.getElementById('timer');
 
+(function (){
+  var sec = 0;
+  timer = setInterval(()=>{
+    ele.innerHTML = '00:'+sec;
+    sec ++;
+  }, 1000) // each 1 second
+})() 
+
+function pause(){
+  clearInterval(timer);
+}
+//function to reset the App state
 function resetState(){
    nextButton.style.display = "none";
    while(answerButtons.firstChild){
@@ -199,6 +215,7 @@ function selectAnswer(e){
    });
    nextButton.style.display = "block"
 }
+//function score//
 function showScore(){
    resetState();
    questionElement.innerHTML = `You scored ${score} out of ${questions.length
